@@ -5,56 +5,50 @@ rgs-prod = {
   }
 }
 
-
 vnets-prod = {
-
   vnet1 = {
     name                = "vnet-infra"
     location            = "centralindia"
     resource_group_name = "rg-infra"
     address_space       = ["10.0.0.0/16"]
-
   }
 }
 
 subnets = {
-  sub1 = {
-    name                 = "frontend-subnet"
+  frontend-subnet = {
     resource_group_name  = "rg-infra"
     virtual_network_name = "vnet-infra"
     address_prefixes     = ["10.0.1.0/24"]
   }
-
-  sub2 = {
-    name                 = "backend-subnet"
+  backend-subnet = {
     resource_group_name  = "rg-infra"
     virtual_network_name = "vnet-infra"
     address_prefixes     = ["10.0.2.0/24"]
   }
+  database-subnet = {
+    resource_group_name  = "rg-infra"
+    virtual_network_name = "vnet-infra"
+    address_prefixes     = ["10.0.3.0/24"]
+  }
 }
-
-
 
 nsgs-prod = {
   nsg1 = {
-
     name                = "frontend-nsg"
     location            = "centralindia"
     resource_group_name = "rg-infra"
-
-
   }
-
-
   nsg2 = {
     name                = "backend-nsg"
     location            = "centralindia"
     resource_group_name = "rg-infra"
-
+  }
+  nsg3 = {
+    name                = "database-nsg"
+    location            = "centralindia"
+    resource_group_name = "rg-infra"
   }
 }
-
-
 
 vms = {
   vm1 = {
@@ -64,9 +58,8 @@ vms = {
     size                = "Standard_F2"
     admin_username      = "webvm1"
     admin_password      = "Password@1234"
-    nic_name            = "frontend-nic" # 👈 ye missing tha
+    nic_name            = "frontend-nic"
   }
-
   vm2 = {
     name                = "backend-vm"
     location            = "centralindia"
@@ -74,22 +67,26 @@ vms = {
     size                = "Standard_F2"
     admin_username      = "webvm1"
     admin_password      = "Password@1234"
-    nic_name            = "backend-nic" # 👈 ye missing tha
+    nic_name            = "backend-nic"
+  }
+  vm3 = {
+    name                = "database-vm"
+    location            = "centralindia"
+    resource_group_name = "rg-infra"
+    size                = "Standard_F2"
+    admin_username      = "dbadmin"
+    admin_password      = "Password@1234"
+    nic_name            = "database-nic"
   }
 }
 
-
-
-
 public_ips = {
-  "pip1" = {
+  pip1 = {
     name                = "frontend-pip"
     location            = "centralindia"
     resource_group_name = "rg-infra"
   }
 }
-
-
 
 key-vaults = {
   k1 = {
@@ -105,19 +102,13 @@ key-vaults = {
 
 sql_databases = {
   db1 = {
-    server_name = "ainfra-sqlsrv01"
-    db_name     = "ainfra-db"
-    location    = "centralindia"
-    rg_name     = "rg-infra"
-    admin_login = "sqladminuser"
-    admin_pass  = "P@ssword1234!"
-    sku_name    = "Basic"
-    max_size_gb = 2
+    server_name  = "ainfra-sqlsrv01"
+    db_name      = "ainfra-db"
+    location     = "centralindia"
+    rg_name      = "rg-infra"
+    admin_login  = "sqladminuser"
+    admin_pass   = "P@ssword1234!"
+    sku_name     = "Basic"
+    max_size_gb  = 2
   }
 }
-
-
-
-
-
-
